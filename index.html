@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="OpenSatMap: A Fine-grained High-resolution Satellite Dataset for Large-scale Map Construction">
+  <meta name="keywords" content="OpenSatMap">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenSatMap: A Fine-grained High-resolution Satellite Dataset for Large-scale Map Construction</title>
+
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQCWF52Y54"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-YQCWF52Y54');
+  </script>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <style>
+        #toc {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            max-width: 250px; /* 调整目录容器的宽度 */
+        }
+        #toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        #toc ul li {
+            margin-bottom: 5px;
+        }
+        #toc ul li a {
+            text-decoration: none;
+            color: blue;
+        }
+  </style>
+
+</head>
+<body>
+
+
+<!-- <section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title"></h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Anonymous Authors
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">OpenSatMap: A Fine-grained High-resolution Satellite Dataset for Large-scale Map Construction</h1>
+          <!-- <h2 class="title is-3">CVPR 2024</h2> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=Gs22F0UAAAAJ&hl">Hongbo Zhao</a>*<sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://lue.fan/">Lue Fan</a>*<sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=iLOoUqIAAAAJ">Yuntao Chen</a>*<sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://haochen-wang409.github.io/">Haochen Wang</a>*<sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a>Yuran Yang</a>*<sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a>Xiaojuan Jin</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a>Yixin Zhang</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://people.ucas.edu.cn/~gfmeng">Gaofeng Meng</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://zhaoxiangzhang.net/">Zhaoxiang Zhang</a><sup>1,2</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>CASIA &amp; UCAS,</span>
+            <span class="author-block"><sup>2</sup>CAIR, HKISI, CAS</span>
+            <span class="author-block"><sup>3</sup>Tencent Maps, Tencent</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2311.17918.pdf"
+                   class="external-link button is-normal is-rounded is-dark"> <!-- TODO: update the link -->
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2311.17918"
+                   class="external-link button is-normal is-rounded is-dark"> <!-- TODO: update the link -->
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/BraveGroup/Drive-WM"
+                   class="external-link button is-normal is-rounded is-dark"> <!-- TODO: update the link -->
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="hero-body">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+    <div class="column is-full-width is-centered">
+        <div class="content has-text-justified">
+            <img src="./static/images/figure1.png" width="100%">
+          <p>
+            <b>Demonstrations of OpenSatMap dataset.</b>
+            It contains high-resolution satellite images with fine-grained annotations, covering diverse geographic locations and popular driving datasets.
+          </p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+    <!--/ Abstract. -->
+</section>
+
+
+<div id="toc"></div>
+  <ul>
+    <!-- TOC will be generated here -->
+  </ul>
+
+<section>
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths is-centered">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- <div class="content has-text-justified">
+            <img src="./static/images/WX20231125-133933@2x.png" width="100%"> -->
+          <!-- <p>
+            <b>Multiview visual forecasting and planning by world model.</b>
+            At time step \( T \), the world model imagines the multiple futures at \(T+K\), and finds it is safe to keep going straight at \(T\). Then the model realizes that the ego car will be too close to the front car according to the imagination of time step \(T + 2K\), so it decides to change to the left lane for a safe overtaking.
+          </p> -->
+        <!-- </div> -->
+          <p>
+            In this paper, we propose <b>OpenSatMap</b>, a fine-grained, high-resolution satellite dataset for large-scale map construction.
+Map construction is one of the foundations of the transportation industry, such as navigation and autonomous driving.
+Extracting road structures from satellite images is an efficient way to construct large-scale maps.
+However, existing satellite datasets provide only coarse semantic-level labels with a relatively low resolution (up to level 19), impeding the advancement of this field.
+In contrast, the proposed <b>OpenSatMap</b> (1) has fine-grained instance-level annotations; (2) consists of high-resolution images (level 20); (3) is currently the largest one of its kind; (4) collects data with high diversity.
+Moreover, <b>OpenSatMap</b> covers and aligns with the popular nuScenes dataset and Argoverse 2 dataset to potentially advance autonomous driving technologies.
+By publishing and maintaining the dataset, we provide a high-quality benchmark for satellite-based map construction and downstream tasks like autonomous driving.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<!-- <section  class="content-section">
+  <div class="container is-max-desktop has-text-centered"> 
+    <h2 class="title is-3">Introduction Video</h2>
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <video poster="" id="intro" autoplay controls muted loop playsinline width="100%">
+          <source src="" type="video/mp4">
+        </video>
+        </div>
+     </div>
+  </div>
+</section> -->
+
+<section  class="content-section">
+  <div class="container is-max-desktop has-text-centered">  
+      <h2 class="title is-3">News</h2>
+      <div class="column is-full-width">
+        <div class="content has-text-justified">
+          <!-- iterize -->
+          <li>💥 [May, 2024]
+            <b>OpenSatMap mini dataset is released!</b>
+          We are excited to announce the release of OpenSatMap dataset, a fine-grained high-resolution satellite dataset for large-scale map construction.
+          The dataset contains high-resolution satellite images with fine-grained annotations, covering diverse geographic locations and popular driving datasets.
+          The dataset is available for download at <a href="https:>">here</a>.
+        </li>
+        <li>
+          <a href="dataset.html">Dataset</a>
+        </li>
+        <li>
+          <a href="code.html">Code</a>
+        </li>
+        <li>
+          <a href="tasks.html">Tasks</a>
+        </li>
+        <li>
+          <a href="evaluation.html">Evaluation</a>
+        </li>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section  class="content-section"> -->
+<!-- <section class="hero is-light is-small"> -->
+  <!-- <div class="hero-body">
+    <div class="container has-text-centered">
+      <h2 class="title is-3">Generation of Diverse Multiview Videos</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/0519.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/0093.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/0102.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/0636.mp4"
+                    type="video/mp4">
+          </video>
+          </div>
+      </div>
+          <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/0914.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/0039.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/0522.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/0559.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section  class="content-section">
+  <!-- Paper video. -->
+ <!-- <div class="container is-max-desktop has-text-centered"> 
+<h2 class="title is-3">Generation of Multiple Plausible Futures</h2>
+<div class="columns is-centered">
+  <div class="column">
+  <div class="content">
+    
+   <div class="content has-text-centered">
+    <h2 class="title is-4">Scene 1 (Turn left)</h2>
+     <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+       <source src="./static/videos/demo1_left_stitched.mp4" type="video/mp4">
+     </video>
+ </div>
+  </div>
+  </div>
+  
+  <div class="column">
+    
+   <div class="content has-text-centered">
+    <h2 class="title is-4">Scene 1 (Turn right)</h2>
+     <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+       <source src="./static/videos/demo1_right_stitched.mp4" type="video/mp4">
+     </video>
+     </div>
+  </div>
+</div>
+<div class="columns is-centered">
+  <div class="column">
+  <div class="content">
+    <h2 class="title is-4">Scene 2 (Turn left)</h2>
+   <div class="content has-text-justified">
+     <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+       <source src="./static/videos/demo2_left_stitched.mp4" type="video/mp4">
+     </video>
+ </div>
+  </div>
+  </div>
+  
+  <div class="column">
+    <h2 class="title is-4">Scene 2 (Go straight)</h2>
+   <div class="content has-text-centered">
+     <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+       <source src="./static/videos/demo2_straight_stitched.mp4" type="video/mp4">
+     </video>
+     </div>
+  </div>
+</div>
+<div class="columns is-centered">
+  <div class="column">
+  <div class="content">
+    <h2 class="title is-4">Scene 3 (Turn left)</h2>
+   <div class="content has-text-justified">
+     <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+       <source src="./static/videos/demo3_left_stitched.mp4" type="video/mp4">
+     </video>
+ </div>
+  </div>
+  </div>
+  
+  <div class="column">
+    <h2 class="title is-4">Scene 3 (Go straight)</h2>
+   <div class="content has-text-centered">
+     <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+       <source src="./static/videos/demo3_straight_stitched.mp4" type="video/mp4">
+     </video>
+     </div>
+  </div>
+</div>
+</div>
+</section> -->
+
+<section  class="content-section">
+  <!-- Paper video. -->
+ <div class="container is-max-desktop has-text-centered"> 
+  <h2 class="title is-3">Visual Element Control</h2>
+ <h2 class="title is-4">Light Changes</h2>
+    <div class="columns is-centered">
+         <div class="column">
+         <div class="content">
+          <div class="content has-text-justified">
+            <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+              <source src="./static/videos/1071_day.mp4" type="video/mp4">
+            </video>
+        </div>
+         </div>
+         </div>
+         
+         <div class="column">
+          <div class="content has-text-centered">
+            <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+              <source src="./static/videos/1071_night.mp4" type="video/mp4">
+            </video>
+            </div>
+         </div>
+   </div>
+   <h2 class="title is-4">Weather Changes</h2>
+    <div class="columns is-centered">
+         <div class="column">
+         <div class="content">
+          <div class="content has-text-justified">
+            <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+              <source src="./static/videos/0093_sunny.mp4" type="video/mp4">
+            </video>
+        </div>
+         </div>
+         </div>
+         
+         <div class="column">
+          <div class="content has-text-centered">
+            <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+              <source src="./static/videos/0093_rainy.mp4" type="video/mp4">
+            </video>
+            </div>
+         </div>
+   </div>
+   <h2 class="title is-4">Control Foreground Object Layouts</h2>
+    <div class="columns is-centered">
+         <div class="column">
+         <div class="content">
+          <div class="content has-text-justified">
+            <img src="./static/images/move_obj.png" width="100%">
+        </div>
+         </div>
+         </div>
+   </div>
+   <h2 class="title is-4">Action Condition</h2>
+   <div class="columns is-centered">
+        <div class="column">
+        <div class="content">
+         <div class="content has-text-justified">
+           <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+             <source src="./static/videos/stop.mp4" type="video/mp4">
+           </video>
+       </div>
+        </div>
+        </div>
+        
+        <div class="column">
+         <div class="content has-text-centered">
+           <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+             <source src="./static/videos/turn_around.mp4" type="video/mp4">
+           </video>
+           </div>
+        </div>
+  </div>
+
+   </div>
+</section>
+<section  class="content-section">
+  <!-- Paper video. -->
+ <div class="container is-max-desktop has-text-centered"> 
+<h2 class="title is-3">Other Datasets</h2>
+<div class="columns is-centered">
+     <div class="column">
+     <div class="content">
+      <div class="content has-text-centered">
+        <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/waymo.mp4" type="video/mp4">
+        </video>
+        </div>
+     </div>
+     </div>
+     
+     <div class="column">
+      <div class="content has-text-centered">
+        <video poster="" id="wod" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/waymo_video.mp4" type="video/mp4">
+        </video>
+        </div>
+     </div>
+</div>
+</div>
+</section>
+<section  class="content-section">
+  <!-- Paper video. -->
+ <div class="container is-max-desktop has-text-centered"> 
+ <h2 class="title is-3">World Model for End-to-End Planning</h2>
+ <div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths is-centered">
+      <div class="content has-text-justified">
+          <img src="./static/images/planning_tree.png" width="100%">
+        <p>
+          <b>End-to-end planning pipeline with our world model.</b> We display the components of our planning pipeline at the top and illustrate the decision-making process in the planning tree using image-based rewards at the bottom.
+        </p>
+  </div>
+</div>
+</div>
+ <h2 class="title is-4">GPT-4V as Reward Function for Non-vectorized Observations</h2>
+  <div class="columns is-centered">
+       <div class="column">
+       <div class="content">
+        <div class="content has-text-justified">
+          <img src="./static/images/gpt4v.png" width="100%">
+      </div>
+       </div>
+       </div>
+ </div>
+</div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            <script type="text/javascript" src="https://www.free-counters.org/count/fpyo"></script><br>
+            This website template is borrowed from <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> under the <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      // 标题缩写映射表
+      const titleMapping = {
+          "OpenSatMap: A Fine-grained High-resolution Satellite Dataset for Large-scale Map Construction": "OpenSatMap Dataset",
+          "Abstract": "Abstract",
+          "News": "News",
+          "Generation of Diverse Multiview Videos": "Multiview Videos",
+          "Generation of Multiple Plausible Futures": "Plausible Futures",
+          "Scene 1 (Turn left)": "Scene 1 (L)",
+          "Scene 1 (Turn right)": "Scene 1 (R)",
+          "Scene 2 (Turn left)": "Scene 2 (L)",
+          "Scene 2 (Go straight)": "Scene 2 (S)",
+          "Scene 3 (Turn left)": "Scene 3 (L)",
+          "Scene 3 (Go straight)": "Scene 3 (S)",
+          "Visual Element Control": "Visual Control",
+          "Light Changes": "Light Changes",
+          "Weather Changes": "Weather Changes",
+          "Control Foreground Object Layouts": "Foreground Control",
+          "Action Condition": "Action Condition",
+          "Other Datasets": "Other Datasets",
+          "World Model for End-to-End Planning": "World Model",
+          "GPT-4V as Reward Function for Non-vectorized Observations": "GPT-4V Reward Function"
+          // 添加更多的映射
+      };
+
+      // 获取所有的标题
+      const headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+      const toc = document.getElementById("toc").querySelector('ul');
+      
+      let tocHTML = '';
+
+      headers.forEach(header => {
+          // 为每个标题创建一个ID
+          const id = header.textContent.toLowerCase().replace(/ /g, "-");
+          header.id = id;
+          tocHTML += `<li><a href="#${id}">${header.innerText}</a></li>`;
+          // // 创建目录项
+          // const li = document.createElement("li");
+          // const a = document.createElement("a");
+          // a.href = `#${id}`;
+
+          // 使用缩写标题
+          const shortTitle = titleMapping[header.textContent] || header.textContent;
+          a.textContent = shortTitle;
+
+          // 根据标题级别设置缩进
+          li.style.marginLeft = `${(parseInt(header.tagName[1]) - 1) * 20}px`;
+
+          li.appendChild(a);
+          ul.appendChild(li);
+          toc.innerHTML = tocHTML;
+      });
+
+      // toc.appendChild(ul);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  
+  <style>
+    body {
+      display: flex;
+    }
+    #toc {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 200px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+    }
+    .content-section {
+      margin-left: 250px;
+      padding: 20px;
+      flex-grow: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="toc">
+    <ul>
+      <!-- TOC will be generated here -->
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <section>
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths is-centered">
+            <h2 class="title is-3">OpenSatMap Dataset</h2>
+            <div class="content has-text-justified">
+              <p>Demonstrations of OpenSatMap dataset. It contains high-resolution satellite images with fine-grained annotations, covering diverse geographic locations and popular driving datasets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths is-centered">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>In this paper, we propose <b>OpenSatMap</b>, a fine-grained, high-resolution satellite dataset for large-scale map construction. Map construction is one of the foundations of the transportation industry, such as navigation and autonomous driving. Extracting road structures from satellite images is an efficient way to construct large-scale maps. However, existing satellite datasets provide only coarse semantic-level labels with a relatively low resolution (up to level 19), impeding the advancement of this field. In contrast, the proposed <b>OpenSatMap</b> (1) has fine-grained instance-level annotations; (2) consists of high-resolution images (level 20); (3) is currently the largest one of its kind; (4) collects data with high diversity. Moreover, <b>OpenSatMap</b> covers and aligns with the popular nuScenes dataset and Argoverse 2 dataset to potentially advance autonomous driving technologies. By publishing and maintaining the dataset, we provide a high-quality benchmark for satellite-based map construction.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths is-centered">
+            <h2 class="title is-3">Introduction</h2>
+            <div class="content has-text-justified">
+              <p>Map construction is a fundamental task in the transportation industry, playing a crucial role in various applications such as navigation and autonomous driving. High-resolution satellite imagery provides a valuable source of information for constructing large-scale maps, as it captures detailed road structures and other relevant features. However, existing satellite datasets often lack the necessary resolution and fine-grained annotations required for accurate map construction. To address this issue, we propose <b>OpenSatMap</b>, a novel dataset that offers high-resolution (level 20) satellite images with fine-grained instance-level annotations. In addition, OpenSatMap covers a wide range of geographic locations, including all 50 U.S. states, 63 Chinese cities, and several popular driving datasets.</p>
+              <p>We further introduce <b>Ba^2-Det</b>, an advanced benchmark for road structure extraction based on diffusion techniques. This benchmark demonstrates superior performance compared to existing methods, highlighting the potential of OpenSatMap for advancing the state-of-the-art in large-scale map construction. The dataset and code are publicly available, providing valuable resources for the research community.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Generate TOC
+      const toc = document.getElementById('toc').querySelector('ul');
+      const headers = document.querySelectorAll('h2, h3');
+      let tocHTML = '';
+      headers.forEach(header => {
+        const id = header.innerText.replace(/\s+/g, '-').toLowerCase();
+        header.id = id;
+        tocHTML += `<li><a href="#${id}">${header.innerText}</a></li>`;
+      });
+      toc.innerHTML = tocHTML;
+    });
+  </script>
+</body>
+</html>

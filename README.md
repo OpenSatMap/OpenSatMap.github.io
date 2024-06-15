@@ -1,1 +1,0 @@
-# OpenSatMap.github.io
