@@ -187,7 +187,7 @@
         <div class="columns is-centered has-text-centered">
           <div class="column is-full-width is-centered">
             <div class="content has-text-justified">
-              <img src="./static/images/figure1.png" width="100%">
+              <img src="./static/images/figure1_black.jpg" width="100%">
               <p>
                 <b>Demonstrations of OpenSatMap dataset.</b>
                 It contains high-resolution satellite images with fine-grained annotations, covering diverse geographic
@@ -263,14 +263,18 @@
       <div class="column is-full-width">
         <div class="content has-text-justified">
           <!-- iterize -->
-          <li>💥 [May, 2024]
+          <li>💥 [June, 2024]
             <b>OpenSatMap mini dataset is released!</b>
             We are excited to announce the release of OpenSatMap dataset, a fine-grained high-resolution satellite
             dataset for large-scale map construction.
             The dataset contains high-resolution satellite images with fine-grained annotations, covering diverse
             geographic locations and popular driving datasets.
-            The dataset is available for download at <a href="https:>">here</a>. <b><span
-                style="color:red;">New</span></b>
+            The dataset is available for download <a href="https:>">here</a>.
+            <!-- <b><span style="color:red;">New</span></b>  -->
+            <strong><a href="https://zhaoxiangzhang.net/wp-content/uploads/2020/02/new.gif"><img decoding="async"
+                  class="alignnone size-full wp-image-105"
+                  src="https://zhaoxiangzhang.net/wp-content/uploads/2020/02/new.gif" alt="new" width="29"
+                  height="13" /></a></strong>
           </li>
           <li>
             <a href="dataset.html">Dataset</a>
@@ -301,17 +305,20 @@
               diverse geographic locations and popular driving datasets.
               It can be used for large-scale map construction and downstream tasks like autonomous driving.
               The images are collected from Google Maps at level 19 resolution (0.3m/pixel) and level 20 resolution
-              (0.15m/pixel), we denote them as OpenSatMap19 and level OpenSatMap20, respectively.
+              (0.15m/pixel), we denote them as OpenSatMap19 and OpenSatMap20, respectively.
               For OpenSatMap19, the images are collected from 8 cities in China, including Beijing, Shanghai, Guangzhou,
               ShenZhen, Chengdu, Xi'an, Tianjin, and Shenyang. There are 1806 images in OpenSatMap19.
               For OpenSatMap20, the images are collected from 18 countries, more than 50 cities all over the world.
               There are 1981 images in OpenSatMap20.
-              For each image, we provide instance-level annotations and eight attributes for road structures, including
-              lanes lines, curb and
-              virtual lines.
-              The instances in OpenSatMap images are annotated by experts in remote sensing and computer vision.
-              We will continue to update the dataset, to grow in size and scope to reflect evolving real-world
-              conditions.
+              <p>
+                For each image, we provide instance-level annotations and eight attributes for road structures,
+                including
+                lanes lines, curb and
+                virtual lines.
+                The instances in OpenSatMap images are annotated by experts in remote sensing and computer vision.
+                We will continue to update the dataset, to grow in size and scope to reflect evolving real-world
+                conditions.
+              </p>
               <h3 class="title is-4">Examples of Annotated Images</h3>
               <h3 class="title is-4">Image Source and Usage License</h3>
               The OpenSatMap images are collected from Google Maps.
@@ -331,12 +338,28 @@
                 <img src="./static/images/category.jpg" width="80%">
               </div>
               </p>
-              For each line instance, we provide eight attributes: <b>color, line type, line number, function,
+              For each line instance, we provide eight attributes: <b>color, line type,number of lines, function,
                 bidirection, boundary, shaded, clearness</b>.
-
+              Specifically, they are:
+              <ul>
+                <li><b>Color</b>: The color of the line. It can be white, yellow, others or none.</li>
+                <li><b>Line type</b>: The type of the line. It can be solid, thick solid, dashed, short dashed dotted,
+                  others or none.</li>
+                <li><b>Number of lines</b>: The number of the line. It can be single, double, others or none.</li>
+                <li><b>Function</b>: The function of the line. It can be Chevron markings, no parking, deceleration
+                  line, bus lane, tidal line,
+                  parking space, vehicle staging area, guide line, changable line, lane-borrowing line, others or none.
+                </li>
+                <li><b>Bidirection</b>: Whether the line is bidirectional. It can be true or false.</li>
+                <li><b>Boundary</b>: Whether the line is a boundary. It can be true or false.</li>
+                <li><b>Shaded</b>: The degree of occlusion. It can be no, minor or major.</li>
+                <li><b>Clearness</b>: The clearness of the line. It can be clear or fuzzy.</li>
+              </ul>
+              Note that there is no man-made visible line on curbs and virtual lines, so we annotate their colors,
+              line types, numbers of lines, and functions as <i>none</i>.
               <h3 class="title is-4">Annotation Format</h3>
               The annotations are stored in JSON format. Each image is annotated with "image_width", "image_height", and
-              a list of "lines".
+              a list of "lines" where the elements are line instances.
               Each line is annotated with "category", "points", "color", "line_type", "line_num", "function",
               "bidirection", "boundary", "shaded", and "clearness".
               <pre><code class="language-python">{"img_name": {
@@ -346,9 +369,9 @@
         {
             "category": str,
             "points": [
-                [float,float],
-                [float,float],
-                [float,float], 
+                [float, float],
+                [float, float],
+                [float, float], 
                 ...
             ],
             "color": str,
@@ -363,9 +386,9 @@
         {
             "category": str,
             "points": [
-                [float,float],
-                [float,float],
-                [float,float], 
+                [float, float],
+                [float, float],
+                [float, float], 
                 ...
             ],
             "color": str,
@@ -382,17 +405,18 @@
   }
 }</code></pre>
               <h3 class="title is-4">Meta data</h3>
-              The meta data of GPS coordinates and image acquisition time are also provided. The meta data is stored in a JSON file.
+              The meta data of GPS coordinates and image acquisition time are also provided. The meta data is stored in
+              a JSON file.
               <pre><code class="language-python">{
     "img_name": [
       {
         "centerGPS": [float, float],
-        "centerWorld": "float float",
+        "centerWorld": [float, float],
         "filename": str
       },
       {
         "centerGPS": [float, float],
-        "centerWorld": "float float",
+        "centerWorld": [float, float],
         "filename": str
       },
       ...
@@ -400,10 +424,35 @@
     ...
   }</code></pre>
               <h3 class="title is-4"> Download</h3>
-              <!-- <h3 class="title is-4">Citation</h3> -->
+              OpenSatMap mini: <a href="">Google Drive</a>, <a href="">Baidu Drive</a>, <a href="">Tencent Drive</a>
+              <p>
+                The full dataset will be released soon.
+              </p>
+              <h3 class="title is-4">Task</h3>
+              <h3 class="title is-5">Overview</h3>
+              We introduce two tasks using OpenSatMap. Task 1 is instance-level line detection from satellite images.
+              Task 2 is satellite-enhanced online map construction for autonomous driving.
+              We are welcome to any other tasks using OpenSatMap. Please contact us for more information.
+              <h3 class="title is-5">Task 1: Instance-level Line Detection</h3>
+              The aim of this task is to extract road structures from satellite images at the instance level.
+              For each instance, we use polylines as the vectorized representation and pixel-level masks as the
+              rasterized representation.
+              <h3 class="title is-5">Task 2: Satellite-enhanced Online Map Construction</h3>
+              We use satellite images to enhance online map construction for autonomous driving.
+              Inputs are carema images of an autonomous vehicle and satellite images of the same area and outputs are
+              vectorized map elements around the vehicle.
               <h3 class="title is-4">Code </h3>
-            
-              <h3 class="title is-4">Communicate</h3>
+              <a href="">Here</a> is our code for data acquisition. The code is based on the <a
+                href="https://github.com/mitroadmaps/roadtracer/tree/master/dataset">RoadTracer</a>. <br>
+
+              <a href=""> Here</a> is our code for instance-level line detection. The code is based on the <a
+                href="https://github.com/open-mmlab/mmsegmentation/">MMsegmentation</a>. <br>
+
+
+              <a href=""> S-HDmap</a> is our code for map construction. The code is based on the <a
+                href="https://github.com/xjtu-cs-gao/SatforHDMap">SatforHDMap</a>.
+
+              <h3 class="title is-4">Contact</h3>
               For any questions, please contact <a href="mailto:zhaohongbo2022@ia.ac.cn">Hongbo Zhao</a> and <a
                 href="mailto:fanlue2019@ia.ac.cn">Lue Fan</a>.
               Or you can open an issue in the <a href="https://github.com/OpenSatMap/OpenSatMap.github.io">OpenSatMap
@@ -411,8 +460,10 @@
               <h3 class="title is-4">Acknowledgement</h3>
               Our baseline codes are based on the <a
                 href="https://github.com/open-mmlab/mmsegmentation/">MMsegmentation</a> and <a
-                href="https://github.com/xjtu-cs-gao/SatforHDMap">SatforHDMap</a>. We thank the authors for their
-              contributions.
+                href="https://github.com/xjtu-cs-gao/SatforHDMap">SatforHDMap</a>.
+              Our data acquisition code is based on the <a
+                href="https://github.com/mitroadmaps/roadtracer/tree/master/dataset">RoadTracer</a>.
+              We thank the authors for their contributions.
               <!-- <h3 class="title is-4">Contact</h3> -->
             </div>
           </div>
