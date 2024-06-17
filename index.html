@@ -26,12 +26,14 @@
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/image-compare-viewer.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <script src="./static/js/image-compare-viewer.min.js"></script>
   <!-- <style>
         #toc {
             border: 1px solid #ccc;
@@ -124,8 +126,7 @@
               <div class="publication-links">
                 <!-- PDF Link. -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/pdf/2311.17918.pdf"
-                    class="external-link button is-normal is-rounded is-dark"> <!-- TODO: update the link -->
+                  <a href="" class="external-link button is-normal is-rounded is-dark"> <!-- TODO: update the link -->
                     <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                     </span>
@@ -133,7 +134,7 @@
                   </a>
                 </span>
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/2311.17918" class="external-link button is-normal is-rounded is-dark">
+                  <a href="" class="external-link button is-normal is-rounded is-dark">
                     <!-- TODO: update the link -->
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -153,8 +154,7 @@
               </span> -->
                 <!-- Code Link. -->
                 <span class="link-block">
-                  <a href="https://github.com/BraveGroup/Drive-WM"
-                    class="external-link button is-normal is-rounded is-dark"> <!-- TODO: update the link -->
+                  <a href="" class="external-link button is-normal is-rounded is-dark"> <!-- TODO: update the link -->
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -320,6 +320,27 @@
                 conditions.
               </p>
               <h3 class="title is-4">Examples of Annotated Images</h3>
+
+              <div class="column">
+                <div class="content">
+                  <div class="columns is-centered">
+                    <div class="column is-full-width">
+
+                      <div class="image-compare shadow-md rounded mb-16">
+                        <img src="static/images/singapore-onenorth_-1_-1_satvisual-ori.png" alt="" />
+                        <img src="static/images/singapore-onenorth_-1_-1_satvisual-instance.png" alt="" />
+                      </div>
+
+                      <div class="image-compare shadow-md rounded mb-16">
+                        <img src="static/images/flyover2_0_0_sat.png" alt="" />
+                        <img src="static/images/flyover2_0_0_satvisual-instance.png" alt="" />
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <h3 class="title is-4">Image Source and Usage License</h3>
               The OpenSatMap images are collected from Google Maps.
               The dataset will be licensed under a Creative Commons CC-BY-NC-SA 4.0 license
@@ -442,15 +463,18 @@
               Inputs are carema images of an autonomous vehicle and satellite images of the same area and outputs are
               vectorized map elements around the vehicle.
               <h3 class="title is-4">Code </h3>
-              <a href="">Here</a> is our code for data acquisition. The code is based on the <a
-                href="https://github.com/mitroadmaps/roadtracer/tree/master/dataset">RoadTracer</a>. <br>
-
-              <a href=""> Here</a> is our code for instance-level line detection. The code is based on the <a
-                href="https://github.com/open-mmlab/mmsegmentation/">MMsegmentation</a>. <br>
-
-
-              <a href=""> S-HDmap</a> is our code for map construction. The code is based on the <a
-                href="https://github.com/xjtu-cs-gao/SatforHDMap">SatforHDMap</a>.
+              <li>
+                <a href="">Here</a> is our code for data acquisition. The code is based on the <a
+                  href="https://github.com/mitroadmaps/roadtracer/tree/master/dataset">RoadTracer</a>. <br>
+              </li>
+              <li>
+                <a href=""> Here</a> is our code for instance-level line detection. The code is based on the <a
+                  href="https://github.com/open-mmlab/mmsegmentation/">MMsegmentation</a>. <br>
+              </li>
+              <li>
+                <a href=""> S-HDmap</a> is our code for map construction. The code is based on the <a
+                  href="https://github.com/xjtu-cs-gao/SatforHDMap">SatforHDMap</a>.
+              </li>
 
               <h3 class="title is-4">Contact</h3>
               For any questions, please contact <a href="mailto:zhaohongbo2022@ia.ac.cn">Hongbo Zhao</a> and <a
@@ -543,6 +567,60 @@
       });
 
       // toc.appendChild(ul);
+    });
+  </script>
+
+  <script>
+    let imageCompareViewers = document.querySelectorAll(".image-compare");
+    let configs = [
+      {
+        addCircle: true,
+        verticalMode: false,
+        hoverStart: true,
+        showLabels: true,
+        labelOptions: {
+          before: 'Without label',
+          after: 'With label',
+          onHover: false
+        },
+      },
+      {
+        addCircle: true,
+        verticalMode: false,
+        hoverStart: true,
+        showLabels: true,
+        labelOptions: {
+          before: 'Without label',
+          after: 'With label',
+          onHover: false
+        },
+      },
+      // { 
+      //   addCircle: true, 
+      //   verticalMode: false, 
+      //   hoverStart: true,
+      //   showLabels: true,
+      //   labelOptions: {
+      //     before: 'GPNeRF [Yuqi 2023]',  
+      //     after: 'Ours',
+      //     onHover: false
+      //   },
+      // },
+      // { 
+      //   addCircle: true, 
+      //   verticalMode: false, 
+      //   hoverStart: true,
+      //   showLabels: true,
+      //   labelOptions: {
+      //     before: '3DGS [Bernhard 2023]',  
+      //     after: 'Ours',
+      //     onHover: false
+      //   },
+      // }
+    ];
+
+    imageCompareViewers.forEach((element, i) => {
+      new ImageCompare(element, configs[i]).mount();
     });
   </script>
 </body>
